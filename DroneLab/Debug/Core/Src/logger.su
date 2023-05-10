@@ -1,0 +1,6 @@
+../Core/Src/logger.c:18:6:LOGGER_Init	4	static
+../Core/Src/logger.c:26:6:LOGGER_OpenFile	4	static
+../Core/Src/logger.c:32:6:LOGGER_WriteLine	24	static
+../Core/Src/logger.c:39:6:LOGGER_WriteData	24	static
+../Core/Src/logger.c:45:6:LOGGER_CloseFile	4	static
+../Core/Src/logger.c:50:7:LOGGER_PrepareString	24	static

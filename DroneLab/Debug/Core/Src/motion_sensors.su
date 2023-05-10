@@ -1,0 +1,9 @@
+../Core/Src/motion_sensors.c:28:5:initSensors	16	static
+../Core/Src/motion_sensors.c:116:6:MOTION_SENSORS_GetGyro	16	static
+../Core/Src/motion_sensors.c:125:6:MOTION_SENSORS_GetAccel	16	static
+../Core/Src/motion_sensors.c:134:6:MOTION_SENSORS_UpdateData	8	static
+../Core/Src/motion_sensors.c:149:6:MOTION_SENSORS_Integrate	24	static
+../Core/Src/motion_sensors.c:160:6:MOTION_SENSORS_CalculateAccelAngles	8	static
+../Core/Src/motion_sensors.c:176:10:GetRotationalMatrix	32	static
+../Core/Src/motion_sensors.c:208:6:ConvertGyroDataToWorldFrame	16	static
+../Core/Src/motion_sensors.c:223:6:ApplyComplementaryFilter	32	static

@@ -1,0 +1,2 @@
+../Core/Src/gyro.c:8:6:GYRO_Init	8	static
+../Core/Src/gyro.c:14:6:GYRO_GetValues	40	static
