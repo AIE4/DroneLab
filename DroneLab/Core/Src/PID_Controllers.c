@@ -21,10 +21,10 @@ float Yaw_Error;
 
 //setpoint is desired angle in radians - level mode
 //time in millisecond elapsed since last PID calcullation
-uint16_t PID_CONTROLLERS_Roll(float setpoint, int time)
+int PID_CONTROLLERS_Roll(float setpoint, int time)
 {
 	float output;
-	float error = setpoint - DATA_ComplementedAngles.X;
+	float error = setpoint - DATA_ComplementedAnglesInDegrees.X;
 	Roll_ITerm += PID_Roll.I * error * time * 0.001; // discrete integration, convert time to seconds
 
 	if(Roll_ITerm > CONFIG_MaximumITerm) // to avoid integral windup set check for maximum ITerm
@@ -37,10 +37,10 @@ uint16_t PID_CONTROLLERS_Roll(float setpoint, int time)
 	return output;
 }
 
-uint16_t PID_CONTROLLERS_Pitch(float setpoint,  int time)
+int PID_CONTROLLERS_Pitch(float setpoint,  int time)
 {
 	float output;
-	float error = setpoint - DATA_ComplementedAngles.X;
+	float error = setpoint - DATA_ComplementedAnglesInDegrees.Y;
 	Pitch_ITerm += PID_Pitch.I * error * time * 0.001; // discrete integration, convert time to seconds
 
 	if(Pitch_ITerm > CONFIG_MaximumITerm) // to avoid integral windup set check for maximum ITerm
@@ -53,10 +53,10 @@ uint16_t PID_CONTROLLERS_Pitch(float setpoint,  int time)
 	return output;
 }
 
-uint16_t PID_CONTROLLERS_Yaw(float setpoint, int time)
+int PID_CONTROLLERS_Yaw(float setpoint, int time)
 {
 	float output;
-	float error = setpoint - DATA_ComplementedAngles.X;
+	float error = setpoint - DATA_ComplementedAnglesInDegrees.Z;
 	Yaw_ITerm += PID_Yaw.I * error * time * 0.001; // discrete integration, convert time to seconds
 
 	if(Yaw_ITerm > CONFIG_MaximumITerm) // to avoid integral windup set check for maximum ITerm

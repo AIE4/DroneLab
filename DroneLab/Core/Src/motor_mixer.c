@@ -8,12 +8,15 @@
 #include "motor_mixer.h"
 #include "dshot.h"
 #include "PID_Controllers.h"
+#include "Data.h"
 
-uint16_t motorsValues[4] = {1000, 1000, 1000, 1000}; // motor values are from 1000 to 2000 us, set 1000 as initial value
-uint16_t throttle = 1000;
-uint16_t roll = 0;
-uint16_t pitch = 0;
-uint16_t yaw = 0;
+uint16_t motorsValues[4] = {0, 0, 0, 0}; // motor values are from 1000 to 2000 us, set 1000 as initial value
+int throttle = 1100;
+int roll = 0;
+int pitch = 0;
+int yaw = 0;
+
+Motors DATA_MotorValues;
 
 /*
  motors numbers
@@ -45,23 +48,43 @@ uint16_t yaw = 0;
 
 void MOTOR_MIXER_RunPID(float *setpoints, int time)
 {
-	throttle = 0;
+	throttle = 1100;
 	roll = PID_CONTROLLERS_Roll(setpoints[1], time);
 	pitch = PID_CONTROLLERS_Pitch(setpoints[2], time);
 	yaw = PID_CONTROLLERS_Yaw(setpoints[3], time);
+	MOTOR_MIXER_Mix();
 }
 
 void MOTOR_MIXER_InitDSHOT()
 {
-	dshot_init(DSHOT600);
+	dshot_init(DSHOT150);
+	motorsValues[0] = 0;
+	motorsValues[1] = 0;
+	motorsValues[2] = 0;
+	motorsValues[3] = 0;
+	dshot_write(motorsValues);
 }
 
 void MOTOR_MIXER_Mix()
 {
-	motorsValues[0] = throttle - roll + pitch + yaw;
-	motorsValues[1] = throttle - roll - pitch - yaw;
-	motorsValues[2] = throttle + roll + pitch - yaw;
-	motorsValues[3] = throttle + roll - pitch + yaw;
+	int i = 0;
+	motorsValues[0] = throttle - roll + pitch;// + yaw;
+	motorsValues[1] = throttle - roll - pitch;// - yaw;
+	motorsValues[2] = throttle + roll + pitch;// - yaw;
+	motorsValues[3] = throttle + roll - pitch;// + yaw;
+
+	for(i = 0; i < 4; i++)
+	{
+		if(motorsValues[i] < 1000)
+		{
+			motorsValues[i] = 1000;
+		}
+	}
+
+	DATA_MotorValues.motor0 = motorsValues[0];
+	DATA_MotorValues.motor1 = motorsValues[1];
+	DATA_MotorValues.motor2 = motorsValues[2];
+	DATA_MotorValues.motor3 = motorsValues[3];
 }
 
 void MOTOR_MIXER_WriteMotors()

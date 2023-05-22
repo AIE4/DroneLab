@@ -20,7 +20,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
-#include "Time.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -61,8 +60,8 @@ volatile uint32_t systick_micros;
 extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
 extern DMA_HandleTypeDef hdma_tim2_ch1;
 extern DMA_HandleTypeDef hdma_tim2_up_ch3;
+extern DMA_HandleTypeDef hdma_tim3_ch4_up;
 extern DMA_HandleTypeDef hdma_tim5_ch2;
-extern DMA_HandleTypeDef hdma_tim5_ch4_trig;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -222,17 +221,17 @@ void DMA1_Stream1_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles DMA1 stream3 global interrupt.
+  * @brief This function handles DMA1 stream2 global interrupt.
   */
-void DMA1_Stream3_IRQHandler(void)
+void DMA1_Stream2_IRQHandler(void)
 {
-  /* USER CODE BEGIN DMA1_Stream3_IRQn 0 */
+  /* USER CODE BEGIN DMA1_Stream2_IRQn 0 */
 
-  /* USER CODE END DMA1_Stream3_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_tim5_ch4_trig);
-  /* USER CODE BEGIN DMA1_Stream3_IRQn 1 */
+  /* USER CODE END DMA1_Stream2_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_tim3_ch4_up);
+  /* USER CODE BEGIN DMA1_Stream2_IRQn 1 */
 
-  /* USER CODE END DMA1_Stream3_IRQn 1 */
+  /* USER CODE END DMA1_Stream2_IRQn 1 */
 }
 
 /**

@@ -33,6 +33,8 @@
 #include "XYZ_Data.h"
 #include "Data.h"
 #include "motor_mixer.h"
+#include "time.h"
+#include "Configuration.h"
 
 /* USER CODE END Includes */
 
@@ -70,6 +72,8 @@ uint16_t my_motor_value[4] = {0, 0, 0, 0};
 
 uint8_t buffer[64];
 
+uint32_t time = 0;
+
 /* USER CODE END 0 */
 
 /**
@@ -102,24 +106,31 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_TIM2_Init();
-  MX_TIM5_Init();
   MX_USB_DEVICE_Init();
+  MX_TIM3_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
 
-  dshot_init(DSHOT600);
+  //dshot_init(DSHOT600);
+  MOTOR_MIXER_InitDSHOT();
 
-  float setpoints[4] = {1, 1, 1, 1};
+  float setpoints[4] = {0, 0, 0, 0};
 
   int i = 0;
 
-	XYZ_Data gyro;
-	XYZ_Data accel;
+	//XYZ_Data gyro;
+	//XYZ_Data accel;
 
-	char gyroString[50];
+	//char gyroString[70];
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  if(!HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13))
+  {
+	  CONFIGURATION_Start(buffer);
+  }
 
 	for(i = 0; i < 15; ++i)
 		  {
@@ -129,22 +140,51 @@ int main(void)
 
     initSensors();
 
+    for(i = 0; i < 2000; ++i)
+	  {
+    	MOTOR_MIXER_WriteMotors();
+    		HAL_Delay(1);
+	  }
+
+    time = systick_micros;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  if(buffer[17] <= 15)
+	  {
+		  setpoints[1] = buffer[17];
+	  }
+	  else
+	  {
+		  setpoints[1] = -(buffer[17] - 15);
+	  }
+
+	  if(buffer[18] <= 15)
+	  {
+		  setpoints[2] = buffer[18];
+	  }
+	  else
+	  {
+		  setpoints[2] = -(buffer[18] - 15);
+	  }
 	//dshot_write(my_motor_value);
-	HAL_Delay(50);
+	MOTOR_MIXER_WriteMotors();
+	HAL_Delay(1);
+
+	//uint8_t a = buffer[0];
 
 	MOTION_SENSORS_UpdateData();
-	MOTOR_MIXER_RunPID(setpoints, 1);
+	MOTOR_MIXER_RunPID(setpoints, systick_micros - time);
+	time = systick_micros;
 
-	//sprintf(gyroString, "GYRO: %.2f, %.2f, %.2f ACCEL: %.2f, %.2f, %.2f ANGLES: %.2f, %.2f, %.2f ANGLES: %.2f, %.2f, %.2f\n\r", DATA_RadiansPerSecond.X, DATA_RadiansPerSecond.Y, DATA_RadiansPerSecond.Z, DATA_GForce.X, DATA_GForce.Y, DATA_GForce.Z, DATA_GyroAnglesInWorldFrame.X, DATA_GyroAnglesInWorldFrame.Y, DATA_GyroAnglesInWorldFrame.Z,  DATA_ComplementedAngles.X, DATA_ComplementedAngles.Y, DATA_ComplementedAngles.Z);
-	sprintf(gyroString, "%.2f, %.2f, %.2f %.2f, %.2f, %.2f %.2f, %.2f, %.2f %.2f, %.2f, %.2f\n\r", DATA_RadiansPerSecond.X, DATA_RadiansPerSecond.Y, DATA_RadiansPerSecond.Z, DATA_GForce.X, DATA_GForce.Y, DATA_GForce.Z, DATA_GyroAnglesInWorldFrame.X, DATA_GyroAnglesInWorldFrame.Y, DATA_GyroAnglesInWorldFrame.Z,  DATA_ComplementedAngles.X, DATA_ComplementedAngles.Y, DATA_ComplementedAngles.Z);
+	//sprintf(gyroString, "%.2f %.2f %.2f\n\r", DATA_ComplementedAngles.X, DATA_ComplementedAngles.Y, DATA_ComplementedAngles.Z);
+	//sprintf(gyroString, "Gyro: %.2f %.2f %.2f Accel: %.2f %.2f %.2f Angle: %.2f %.2f %.2f AngleC: %.2f %.2f %.2f %hu %hu %hu %hu\n\r", DATA_RadiansPerSecond.X, DATA_RadiansPerSecond.Y, DATA_RadiansPerSecond.Z, DATA_GForce.X, DATA_GForce.Y, DATA_GForce.Z, DATA_AccelAngles.X, DATA_AccelAngles.Y, DATA_AccelAngles.Z,  DATA_ComplementedAngles.X, DATA_ComplementedAngles.Y, DATA_ComplementedAngles.Z, DATA_MotorValues.motor0, DATA_MotorValues.motor1, DATA_MotorValues.motor2, DATA_MotorValues.motor3);
 	//CDC_Transmit_FS((uint8_t*)gyroString, strlen(gyroString));
-	//LOGGER_WriteData(gyroString);
+	LOGGER_WriteData();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -196,11 +236,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /*if (HAL_SYSTICK_Config(SystemCoreClock / 1000000) != HAL_OK)
-	{
-	  Error_Handler();
-	}*/
 }
 
 /* USER CODE BEGIN 4 */

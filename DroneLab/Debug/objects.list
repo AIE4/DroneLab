@@ -1,3 +1,4 @@
+"./Core/Src/Configuration.o"
 "./Core/Src/PID_Controllers.o"
 "./Core/Src/Utilities.o"
 "./Core/Src/accel.o"

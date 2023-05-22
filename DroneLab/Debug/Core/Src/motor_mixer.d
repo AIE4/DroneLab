@@ -32,7 +32,7 @@ Core/Src/motor_mixer.o: ../Core/Src/motor_mixer.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
- ../Core/Inc/PID_Controllers.h
+ ../Core/Inc/PID_Controllers.h ../Core/Inc/Data.h ../Core/Inc/XYZ_Data.h
 ../Core/Inc/motor_mixer.h:
 ../Core/Inc/dshot.h:
 ../Core/Inc/tim.h:
@@ -70,3 +70,5 @@ Core/Src/motor_mixer.o: ../Core/Src/motor_mixer.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
 ../Core/Inc/PID_Controllers.h:
+../Core/Inc/Data.h:
+../Core/Inc/XYZ_Data.h:

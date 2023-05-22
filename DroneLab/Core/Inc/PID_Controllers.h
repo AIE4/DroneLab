@@ -9,9 +9,9 @@
 
 #include "stdint.h"
 
-uint16_t PID_CONTROLLERS_Roll(float setpoint, int time);
-uint16_t PID_CONTROLLERS_Pitch(float setpoint, int time);
-uint16_t PID_CONTROLLERS_Yaw(float setpoint, int time);
+int PID_CONTROLLERS_Roll(float setpoint, int time);
+int PID_CONTROLLERS_Pitch(float setpoint, int time);
+int PID_CONTROLLERS_Yaw(float setpoint, int time);
 
 
 

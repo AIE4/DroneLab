@@ -1,4 +1,4 @@
-../Core/Src/motor_mixer.c:46:6:MOTOR_MIXER_RunPID	16	static
-../Core/Src/motor_mixer.c:54:6:MOTOR_MIXER_InitDSHOT	8	static
-../Core/Src/motor_mixer.c:59:6:MOTOR_MIXER_Mix	4	static
-../Core/Src/motor_mixer.c:67:6:MOTOR_MIXER_WriteMotors	8	static
+../Core/Src/motor_mixer.c:49:6:MOTOR_MIXER_RunPID	16	static
+../Core/Src/motor_mixer.c:58:6:MOTOR_MIXER_InitDSHOT	8	static
+../Core/Src/motor_mixer.c:68:6:MOTOR_MIXER_Mix	16	static
+../Core/Src/motor_mixer.c:90:6:MOTOR_MIXER_WriteMotors	8	static

@@ -5,6 +5,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/Configuration.c \
 ../Core/Src/PID_Controllers.c \
 ../Core/Src/Utilities.c \
 ../Core/Src/accel.c \
@@ -25,6 +26,7 @@ C_SRCS += \
 ../Core/Src/tim.c 
 
 OBJS += \
+./Core/Src/Configuration.o \
 ./Core/Src/PID_Controllers.o \
 ./Core/Src/Utilities.o \
 ./Core/Src/accel.o \
@@ -45,6 +47,7 @@ OBJS += \
 ./Core/Src/tim.o 
 
 C_DEPS += \
+./Core/Src/Configuration.d \
 ./Core/Src/PID_Controllers.d \
 ./Core/Src/Utilities.d \
 ./Core/Src/accel.d \
@@ -72,7 +75,7 @@ Core/Src/%.o Core/Src/%.su: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/PID_Controllers.d ./Core/Src/PID_Controllers.o ./Core/Src/PID_Controllers.su ./Core/Src/Utilities.d ./Core/Src/Utilities.o ./Core/Src/Utilities.su ./Core/Src/accel.d ./Core/Src/accel.o ./Core/Src/accel.su ./Core/Src/dma.d ./Core/Src/dma.o ./Core/Src/dma.su ./Core/Src/dshot.d ./Core/Src/dshot.o ./Core/Src/dshot.su ./Core/Src/gpio.d ./Core/Src/gpio.o ./Core/Src/gpio.su ./Core/Src/gyro.d ./Core/Src/gyro.o ./Core/Src/gyro.su ./Core/Src/logger.d ./Core/Src/logger.o ./Core/Src/logger.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/motion_sensors.d ./Core/Src/motion_sensors.o ./Core/Src/motion_sensors.su ./Core/Src/motor_mixer.d ./Core/Src/motor_mixer.o ./Core/Src/motor_mixer.su ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/stm32f4xx_nucleo_bus.d ./Core/Src/stm32f4xx_nucleo_bus.o ./Core/Src/stm32f4xx_nucleo_bus.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su ./Core/Src/tim.d ./Core/Src/tim.o ./Core/Src/tim.su
+	-$(RM) ./Core/Src/Configuration.d ./Core/Src/Configuration.o ./Core/Src/Configuration.su ./Core/Src/PID_Controllers.d ./Core/Src/PID_Controllers.o ./Core/Src/PID_Controllers.su ./Core/Src/Utilities.d ./Core/Src/Utilities.o ./Core/Src/Utilities.su ./Core/Src/accel.d ./Core/Src/accel.o ./Core/Src/accel.su ./Core/Src/dma.d ./Core/Src/dma.o ./Core/Src/dma.su ./Core/Src/dshot.d ./Core/Src/dshot.o ./Core/Src/dshot.su ./Core/Src/gpio.d ./Core/Src/gpio.o ./Core/Src/gpio.su ./Core/Src/gyro.d ./Core/Src/gyro.o ./Core/Src/gyro.su ./Core/Src/logger.d ./Core/Src/logger.o ./Core/Src/logger.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/motion_sensors.d ./Core/Src/motion_sensors.o ./Core/Src/motion_sensors.su ./Core/Src/motor_mixer.d ./Core/Src/motor_mixer.o ./Core/Src/motor_mixer.su ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/stm32f4xx_nucleo_bus.d ./Core/Src/stm32f4xx_nucleo_bus.o ./Core/Src/stm32f4xx_nucleo_bus.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su ./Core/Src/tim.d ./Core/Src/tim.o ./Core/Src/tim.su
 
 .PHONY: clean-Core-2f-Src
 

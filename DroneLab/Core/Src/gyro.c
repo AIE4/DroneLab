@@ -21,9 +21,9 @@ void GYRO_GetValues(XYZ_Data *values)
 	//float x = ((float)data.x * 0.001 * 3.14159/180);
 
 	//radians per second
-	values->X = ((float)data.x * 0.001 * 3.14159/180) - DATA_RadiansPerSecond_Offset.X;
-	values->Y = ((float)data.y * 0.001 * 3.14159/180) - DATA_RadiansPerSecond_Offset.Y;
-	values->Z = ((float)data.z * 0.001 * 3.14159/180) - DATA_RadiansPerSecond_Offset.Z;
+	values->X = ((float)data.x * 0.001 * 3.14159/180) - DATA_GyroRadiansPerSecond_Offset.X;
+	values->Y = ((float)data.y * 0.001 * 3.14159/180) - DATA_GyroRadiansPerSecond_Offset.Y;
+	values->Z = ((float)data.z * 0.001 * 3.14159/180) - DATA_GyroRadiansPerSecond_Offset.Z;
 
 	//degrees per second
 	/*values->X = ((float)data.x * 0.001) - DATA_GyroDegreesPerSecond_Offset.X;

@@ -12,5 +12,6 @@ void MOTION_SENSORS_Integrate(uint32_t time);
 void MOTION_SENSORS_CalculateAccelAngles();
 void ConvertGyroDataToWorldFrame();
 void ApplyComplementaryFilter(uint32_t time);
+void ConvertComplemetedAnglesToDegrees();
 
 #endif // MOTION_SENSORS_H
